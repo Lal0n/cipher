@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>תבנית לדיסקית הצפנה - 24 גזרות</title>
+    <style>
+        body { 
+            text-align: center; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #f9f9f9;
+        }
+        .circle-container { 
+            margin: 20px auto; 
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        @media print {
+            body { background-color: white; margin: 0; }
+            .circle-container { box-shadow: none; margin: 0; padding: 0; }
+            button, h2, p { display: none; } /* מסתיר את הטקסטים והכפתור בזמן הדפסה */
+        }
+        .print-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .print-btn:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+    <h2>תבנית מעגל לדיסקית הצפנה (24 גזרות)</h2>
+    <p>הדפיסו את העמוד על גבי בריסטול. קו המקווקו הפנימי נועד לעזור בכתיבה ישרה של האותיות.</p>
+    
+    <button class="print-btn" onclick="window.print()">🖨️ הדפס תבנית</button>
+    
+    <br>
+    
+    <div class="circle-container">
+        <!-- ה-SVG מוגדר לגודל של כ-18 ס"מ כדי להתאים להדפסה על דף A4 -->
+        <svg width="18cm" height="18cm" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+            
+            <!-- מעגל חיצוני -->
+            <circle cx="500" cy="500" r="480" stroke="black" stroke-width="4" fill="none" />
+            
+            <!-- מעגל פנימי מקווקו לעזרה בכתיבת האותיות -->
+            <circle cx="500" cy="500" r="380" stroke="#888" stroke-width="2" fill="none" stroke-dasharray="10,10" />
+            
+            <!-- מעגל מרכזי ריק לחיתוך/הכנסת הסיכה המתפצלת -->
+            <circle cx="500" cy="500" r="15" stroke="black" stroke-width="3" fill="none" />
+
+            <!-- קווים המחלקים ל-24 גזרות -->
+            <script>
+                const svg = document.querySelector('svg');
+                for(let i = 0; i < 24; i++) {
+                    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                    line.setAttribute("x1", "500");
+                    line.setAttribute("y1", "500");
+                    // הקו נמתח מהמרכז ועד למעגל החיצוני
+                    line.setAttribute("x2", "500");
+                    line.setAttribute("y2", "20");
+                    line.setAttribute("stroke", "black");
+                    line.setAttribute("stroke-width", "2");
+                    // סיבוב של כל קו ב-15 מעלות (360/24=15)
+                    line.setAttribute("transform", `rotate(${i * 15}, 500, 500)`);
+                    svg.appendChild(line);
+                }
+            </script>
+        </svg>
+    </div>
+</body>
+</html>
